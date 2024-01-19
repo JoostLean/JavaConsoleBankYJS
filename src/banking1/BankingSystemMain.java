@@ -6,7 +6,6 @@ public class BankingSystemMain extends AccountManager implements ICustomDefine {
 
 	public static void main(String[] args) {
 		AccountManager accManager = new AccountManager();
-//		BankingSystem bankSystem = new BankingSystem();
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		while(true) {
