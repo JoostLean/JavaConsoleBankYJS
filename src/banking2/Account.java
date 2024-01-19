@@ -1,9 +1,5 @@
-package banking;
+package banking2;
 
-import java.util.Scanner;
-
-
-/* 입금출금 기능구현 */
 public class Account {
 
 	private String accNum;
@@ -15,6 +11,7 @@ public class Account {
 		this.name = name;
 		this.balance = balance;
 	}
+	
 	public String getAccNum() {
 		return accNum;
 	}
@@ -33,12 +30,4 @@ public class Account {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
-
-	public void deposit() {
-		
-	}
-	public void withdraw() {
-		
-	}
-
 }
