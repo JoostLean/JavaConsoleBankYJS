@@ -1,4 +1,4 @@
-package banking1;
+package banking2;
 
 import java.util.Scanner;
 
@@ -6,7 +6,7 @@ public class AccountManager {
 	private static final int MAX_NUM = 50;
 	private Account[] account = new Account[MAX_NUM]; 
 	private int numOfAcc = 0;
-	
+
 	public void showMenu() {
 		System.out.println("-----Menu-----");
 		System.out.print("1.계좌개설");
@@ -22,16 +22,38 @@ public class AccountManager {
 
 	public void makeAccount() {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("계좌번호 : ");
+		System.out.println("-----계좌선택-----");
+		System.out.println("1.보통계좌");
+		System.out.println("2.신용신뢰계좌");
+		System.out.print("선택:");
+		int accType = sc.nextInt();
+		System.out.print("계좌번호: ");
 		String accNum = sc.next();
-		System.out.print("고객이름 : ");
+		System.out.print("고객이름: ");
 		String name = sc.next();
-		System.out.print("잔고 : ");
+		System.out.print("잔고: ");
 		int balance = sc.nextInt();
-		account[numOfAcc++] = new Account(accNum, name, balance);
+		System.out.print("기본이자%(정수형태로입력): ");
+		int interest = sc.nextInt();
+		char credit = '0';
+		if(accType==2) {
+			System.out.print("신용등급(A,B,C등급): ");
+			credit = sc.next().charAt(0);
+		}
+		int plusInterest = 0;
+		if(credit=='A') {
+			plusInterest = 7;
+		} else if (credit=='B') {
+			plusInterest = 4;
+		} else if (credit=='C') {
+			plusInterest = 2;
+		} else {
+			plusInterest = 0;
+		}
+		account[numOfAcc++] = new Account(accType, accNum, name, balance, interest, plusInterest, credit);
 		System.out.println("계좌개설이 완료되었습니다.");
 	}
-	
+
 	public void deposit() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("계좌번호와 입금할 금액을 입력하세요");
@@ -40,8 +62,18 @@ public class AccountManager {
 		System.out.print("입금액 : ");
 		int amount = sc.nextInt();
 		for(int i=0 ; i<numOfAcc ; i++) {
-			if(depoAccNum.compareTo(account[i].getAccNum())==0) {
-				account[i].setBalance(account[i].getBalance() + amount);
+			if(account[i].getAccType()==1) {
+				if(depoAccNum.compareTo(account[i].getAccNum())==0) {
+					account[i].setBalance(account[i].getBalance() + 
+							(int)(account[i].getBalance() * ((float)account[i].getInterest() / 100)) + amount);
+				}
+			}
+			if(account[i].getAccType()==2) {
+				if(depoAccNum.compareTo(account[i].getAccNum())==0) {
+					account[i].setBalance(account[i].getBalance() +
+							 (int)(account[i].getBalance() * ((float)account[i].getInterest() / 100)) +
+							 (int)(account[i].getBalance() * ((float)account[i].getPlusInterest() / 100)) + amount);
+				}
 			}
 		}
 		System.out.println("입금이 완료되었습니다.");
@@ -66,9 +98,13 @@ public class AccountManager {
 		if(numOfAcc>0) {
 			for(int i=0 ; i<numOfAcc ; i++) {
 				System.out.println("-------------");
-				System.out.println("계좌번호 : "+ account[i].getAccNum());
-				System.out.println("고객이름 : "+ account[i].getName());
-				System.out.println("잔고 : "+ account[i].getBalance());
+				System.out.println("계좌번호>"+ account[i].getAccNum());
+				System.out.println("고객이름>"+ account[i].getName());
+				System.out.println("잔고>"+ account[i].getBalance());
+				System.out.println("기본이자>"+ account[i].getInterest());
+				if(account[i].getAccType()==2) {
+					System.out.println("신용등급>"+ account[i].getCredit());
+				}
 				System.out.println("-------------");
 			}
 		}
