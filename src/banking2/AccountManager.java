@@ -61,6 +61,7 @@ public class AccountManager {
 		String depoAccNum = sc.next();
 		System.out.print("입금액 : ");
 		int amount = sc.nextInt();
+		System.out.println("a");
 		for(int i=0 ; i<numOfAcc ; i++) {
 			if(account[i].getAccType()==1) {
 				if(depoAccNum.compareTo(account[i].getAccNum())==0) {
