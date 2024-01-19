@@ -1,20 +1,20 @@
 package banking1;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
-interface BankingSystemMainMenu {
-	final int MAKE = 1;
-	final int DEPOSIT = 2;
-	final int WITHDRAW = 3;
-	final int INQUIRE = 4;
-	final int EXIT = 5;
-}
+import banking.Account;
 
-public class AccountManager extends Account implements BankingSystemMainMenu {
-	public AccountManager() {}
-	public AccountManager(String accNum, String name, int balance) {
-		super(accNum, name, balance);
-	}
+public class AccountManager {
+
+	static HashSet<Account> lists = new HashSet<Account>();
+	
+	static final int MAKE = 1;
+	static final int DEPOSIT = 2;
+	static final int WITHDRAW = 3;
+	static final int INQUIRE = 4;
+	static final int EXIT = 5;
+	
 	static void showMenu() {
 		System.out.println("-----Menu-----");
 		System.out.print("1.계좌개설");
@@ -36,7 +36,8 @@ public class AccountManager extends Account implements BankingSystemMainMenu {
 		switch (choice) {
 		case MAKE:
 			System.out.println("***신규계좌개설***");
-			Account.makeAccount();
+			makeAccount(lists);
+			selectMenu();
 			break;
 		case DEPOSIT:
 			System.out.println("*****입  금*****");
@@ -61,5 +62,28 @@ public class AccountManager extends Account implements BankingSystemMainMenu {
 			break;
 		}
 		scanner.close();
+	}
+
+//	static void AccountInfoHandler() {
+//		lists = new HashSet<Account>();
+//	}
+	
+	static void makeAccount(HashSet<Account> lists) {
+		String iAccNum,iName;
+		int iBalance;
+		Scanner sc = new Scanner(System.in);
+		System.out.print("계좌번호 : ");
+		iAccNum = sc.next();
+		System.out.print("고객이름 : ");
+		iName = sc.next();
+		System.out.print("잔고 : ");
+		iBalance = sc.nextInt();
+		sc.close();
+		Account newAcc = new Account(iAccNum,iName,iBalance);
+		lists.add(newAcc);
+	}
+	
+	static void showAccounts(Account newAcc) {
+		System.out.println(newAcc);
 	}
 }

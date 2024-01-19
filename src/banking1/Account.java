@@ -9,6 +9,9 @@ public class Account {
 	private String name;
 	private int balance;
 
+//	public Account(String accNum, String name, int balance) {
+//		// TODO Auto-generated constructor stub
+//	}
 	public String getAccNum() {
 		return accNum;
 	}
@@ -28,25 +31,22 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public Account() {}
-	public Account(String accNum, String name, int balance) {
-		this.accNum = accNum;
-		this.name = name;
-		this.balance = balance;
-	}
+//	public Account() {}
+//	public Account(String accNum, String name, int balance) {
+//		this.accNum = accNum;
+//		this.name = name;
+//		this.balance = balance;
+//	}
 	
-	HashSet<Account> lists = new HashSet<Account>();
-
-	static void makeAccount(Account lists) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("계좌번호 : ");
-		String toAccNum = sc.next();
-		System.out.println("고객이름 : ");
-		String toName = sc.next();
-		System.out.println("잔고 : ");
-		int toBalance = sc.nextInt();
-		Account acc = new Account(toAccNum, toName, toBalance);
-	}
+//	static void makeAccount() {
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("계좌번호 : ");
+//		String toAccNum = sc.next();
+//		System.out.println("고객이름 : ");
+//		String toName = sc.next();
+//		System.out.println("잔고 : ");
+//		int toBalance = sc.nextInt();
+//	}
 	
 //	public static void main(String[] args) {
 //		// TODO Auto-generated method stub
