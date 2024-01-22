@@ -50,10 +50,10 @@ public class AccountManager {
 		} else {
 			plusInterest = 0;
 		}
-		account[numOfAcc++] = new Account(accType, accNum, name, balance, interest, plusInterest, credit);
+		account[numOfAcc++] = new Account(accNum, name, balance, accType, credit, interest, plusInterest);
 		System.out.println("계좌개설이 완료되었습니다.");
 	}
-
+	
 	public void deposit() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("계좌번호와 입금할 금액을 입력하세요");
