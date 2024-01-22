@@ -10,16 +10,11 @@ public class Account {
 	private int plusInterest;
 	private char credit;
 
-//	public abstract double calc();
-	
 	public Account(String accNum, String name, int balance, int accType) {
 		this.accType = accType;
 		this.accNum = accNum;
 		this.name = name;
 		this.balance = balance;
-//		this.interest = interest;
-//		this.plusInterest = plusInterest;
-//		this.credit = credit;
 	}
 	
 	public String getAccNum() {

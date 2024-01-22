@@ -36,32 +36,18 @@ public class AccountManager {
 		System.out.print("기본이자%(정수형태로입력): ");
 		int interest = sc.nextInt();
 		char credit = '0';
-//		if(accType==2) {
-//			System.out.print("신용등급(A,B,C등급): ");
-//			credit = sc.next().charAt(0);
-//		}
 		int plusInterest = 0;
-//		if(credit=='A') {
-//			plusInterest = 7;
-//		} else if (credit=='B') {
-//			plusInterest = 4;
-//		} else if (credit=='C') {
-//			plusInterest = 2;
-//		} else {
-//			plusInterest = 0;
-//		}
 		if(accType==1) {
 			account[numOfAcc++] = new NormalAccount(accNum, name, balance, accType, interest);
 		}
-		else if(accType==2) {			
+		else if(accType==2) {
 			System.out.print("신용등급(A,B,C등급): ");
 			credit = sc.next().charAt(0);
 			account[numOfAcc++] = new HighCreditAccount(accNum, name, balance, accType, credit, interest, plusInterest);
 		}
-//		account[numOfAcc++] = new Account(accNum, name, balance, accType, credit, interest, plusInterest);
 		System.out.println("계좌개설이 완료되었습니다.");
 	}
-	
+
 	public void deposit() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("계좌번호와 입금할 금액을 입력하세요");
