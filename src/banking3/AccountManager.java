@@ -64,30 +64,38 @@ public class AccountManager {
 		System.out.println("계좌개설이 완료되었습니다.");
 	}
 
+	int readDepositAmount() {
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			try {
+				return sc.nextInt();
+			}
+			catch(InputMismatchException e) {
+				System.out.println("금액에 문자를 입력할 수 없습니다.");
+				System.out.print("입금액 : ");
+				sc.nextLine();
+			}
+		}
+	}
+	
 	public void deposit() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("계좌번호와 입금할 금액을 입력하세요");
 		System.out.print("계좌번호 : ");
 		String depoAccNum = sc.next();
-		int amount;
-		try {
-			while(true) {
-				System.out.print("입금액 : ");
-				amount = sc.nextInt();
-				if(amount<0) {
-					System.out.println("마이너스 금액은 입금할 수 없습니다.");
-					continue;
-				}
-				if(!(amount % 500 == 0)) {
-					System.out.println("입금은 500원 단위로 가능합니다.");
-					continue;
-				}
-				break;
+		int amount = 0;
+		while(true) {
+			System.out.print("입금액 : ");
+			amount = readDepositAmount();
+			if(amount<0) {
+				System.out.println("마이너스 금액은 입금할 수 없습니다.");
+				continue;
 			}
-			return;
-		}
-		catch(InputMismatchException e) {
-			System.out.println("금액에 문자를 입력할 수 없습니다.");
+			if(!(amount % 500 == 0)) {
+				System.out.println("입금은 500원 단위로 가능합니다.");
+				continue;
+			}
+			break;
 		}
 		for(int i=0 ; i<numOfAcc ; i++) {
 			if(account[i].getAccType()==1) {
@@ -107,19 +115,72 @@ public class AccountManager {
 		System.out.println("입금이 완료되었습니다.");
 	}
 
+	int readInsufSelect() throws InputMismatchException {
+		Scanner sc = new Scanner(System.in);
+		int read = 0;
+		
+		while(true) {
+			try {
+				read = sc.nextInt();
+				if(!(read==1 || read==2)) {
+					System.out.println("'YES(1)'와 'NO(2)' 중 하나를 선택해주세요.");
+					System.out.println("YES(1): 금액전체 출금처리");
+					System.out.println("NO(2): 출금요청취소");
+					continue;
+				}
+				else if(read==1 || read==2) {
+					return read;
+				}
+			}
+			catch(Exception e) {
+				sc.next();
+				return read;
+//				e.printStackTrace();
+			}
+		}
+//		return read;
+	}
+
 	public void withdraw() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("계좌번호와 입금할 금액을 입력하세요");
 		System.out.print("계좌번호 : ");
 		String depoAccNum = sc.next();
-		System.out.print("출금액 : ");
-		int amount = sc.nextInt();
+		int amount;
+		while(true) {
+			System.out.print("출금액 : ");
+			amount = sc.nextInt();
+			if(amount<0) {
+				System.out.println("마이너스 금액은 출금할 수 없습니다.");
+				continue;
+			}
+			if(!(amount % 1000 == 0)) {
+				System.out.println("출금은 1000원 단위로 가능합니다.");
+				continue;
+			}
+			break;
+		}
 		for(int i=0 ; i<numOfAcc ; i++) {
-			if(depoAccNum.compareTo(account[i].getAccNum())==0) {
+			if(depoAccNum.compareTo(account[i].getAccNum())==0 && account[i].getBalance() < amount) {
+//				String insufSelect = "";
+				int insufSelect;
+				System.out.println("잔고가 부족합니다. 금액전체를 출금할까요?");
+				System.out.println("YES(1): 금액전체 출금처리");
+				System.out.println("NO(2): 출금요청취소");
+				insufSelect = readInsufSelect();
+				if(insufSelect == 1) {
+					account[i].setBalance(account[i].getBalance() - amount);
+					System.out.println("출금이 완료되었습니다.");
+				}
+				else if(insufSelect == 2) {
+					System.out.println("출금요청이 취소되었습니다.");
+					return;
+				}
+			} else if (depoAccNum.compareTo(account[i].getAccNum())==0) {
 				account[i].setBalance(account[i].getBalance() - amount);
+				System.out.println("출금이 완료되었습니다.");
 			}
 		}
-		System.out.println("출금이 완료되었습니다.");
 	}
 
 	public void showAccount() {

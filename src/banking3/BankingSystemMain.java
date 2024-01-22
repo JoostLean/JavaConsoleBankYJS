@@ -52,6 +52,6 @@ public class BankingSystemMain extends AccountManager implements ICustomDefine {
 
 class MenuException extends Exception {
 	public MenuException() {
-		super("사용가능한 메뉴를 입력해주세요.");
+		super("메뉴 입력 예외발생됨.\n메뉴는 1~5사이의 정수를 입력하세요");
 	}
 }
