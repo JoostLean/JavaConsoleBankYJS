@@ -25,17 +25,16 @@ public class AccountManager {
 		System.out.println("-----계좌선택-----");
 		System.out.println("1.보통계좌");
 		System.out.println("2.신용신뢰계좌");
+		int accType;
 		while(true) {
 			System.out.print("선택:");
-			int accType = sc.nextInt();
-			if(accType<3) {
-				System.out.println("다시 입력해주세요.");
-				return;
+			accType = sc.nextInt();
+			if(!(accType>=1 && accType<=2)) {
+				System.out.println("[1.보통계좌],[2.신용신뢰계좌] 중 하나를 선택해주세요.");
+				continue;
 			}
+			break;
 		}
-//		if(!(accType==1 || accType==2)) {
-//			System.out.println("다시 입력해주세요");
-//		}
 		System.out.print("계좌번호: ");
 		String accNum = sc.next();
 		System.out.print("고객이름: ");
@@ -50,8 +49,15 @@ public class AccountManager {
 			account[numOfAcc++] = new NormalAccount(accNum, name, balance, accType, interest);
 		}
 		else if(accType==2) {
-			System.out.print("신용등급(A,B,C등급): ");
-			credit = sc.next().charAt(0);
+			while(true) {
+				System.out.print("신용등급(A,B,C등급): ");
+				credit = sc.next().charAt(0);
+				if(!(credit>='A' && credit<='C')) {
+					System.out.println("신용등급을 'A','B','C' 중에 선택해주세요.");
+					continue;
+				}
+				break;
+			}
 			account[numOfAcc++] = new HighCreditAccount(accNum, name, balance, accType, credit, interest, plusInterest);
 		}
 		System.out.println("계좌개설이 완료되었습니다.");
