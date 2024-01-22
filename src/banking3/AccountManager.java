@@ -75,7 +75,6 @@ public class AccountManager {
 				System.out.print("입금액 : ");
 				amount = sc.nextInt();
 				if(amount<0) {
-					System.out.println("a");
 					System.out.println("마이너스 금액은 입금할 수 없습니다.");
 					continue;
 				}
