@@ -1,5 +1,6 @@
 package banking3;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AccountManager {
@@ -69,14 +70,24 @@ public class AccountManager {
 		System.out.print("계좌번호 : ");
 		String depoAccNum = sc.next();
 		int amount;
-		while(true) {
-			System.out.print("입금액 : ");
-			amount = sc.nextInt();
-			if(amount<0) {
-				System.out.println("마이너스 금액은 입금할 수 없습니다.");
-				continue;
+		try {
+			while(true) {
+				System.out.print("입금액 : ");
+				amount = sc.nextInt();
+				if(amount<0) {
+					System.out.println("마이너스 금액은 입금할 수 없습니다.");
+					continue;
+				}
+				if(!(amount % 500 == 0)) {
+					System.out.println("입금은 500원 단위로 가능합니다.");
+					continue;
+				}
+				break;
 			}
-			break;
+			return;
+		}
+		catch(InputMismatchException e) {
+			System.out.println("금액에 문자를 입력할 수 없습니다.");
 		}
 		for(int i=0 ; i<numOfAcc ; i++) {
 			if(account[i].getAccType()==1) {
