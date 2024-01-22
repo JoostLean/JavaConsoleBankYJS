@@ -1,4 +1,4 @@
-package banking2;
+package banking3;
 
 import java.util.Scanner;
 
@@ -25,17 +25,8 @@ public class AccountManager {
 		System.out.println("-----계좌선택-----");
 		System.out.println("1.보통계좌");
 		System.out.println("2.신용신뢰계좌");
-		while(true) {
-			System.out.print("선택:");
-			int accType = sc.nextInt();
-			if(accType<3) {
-				System.out.println("다시 입력해주세요.");
-				return;
-			}
-		}
-//		if(!(accType==1 || accType==2)) {
-//			System.out.println("다시 입력해주세요");
-//		}
+		System.out.print("선택:");
+		int accType = sc.nextInt();
 		System.out.print("계좌번호: ");
 		String accNum = sc.next();
 		System.out.print("고객이름: ");
