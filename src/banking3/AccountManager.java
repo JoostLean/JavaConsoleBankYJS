@@ -68,9 +68,10 @@ public class AccountManager {
 		System.out.println("계좌번호와 입금할 금액을 입력하세요");
 		System.out.print("계좌번호 : ");
 		String depoAccNum = sc.next();
-		System.out.print("입금액 : ");
-		int amount = sc.nextInt();
+		int amount;
 		while(true) {
+			System.out.print("입금액 : ");
+			amount = sc.nextInt();
 			if(amount<0) {
 				System.out.println("마이너스 금액은 입금할 수 없습니다.");
 				continue;
