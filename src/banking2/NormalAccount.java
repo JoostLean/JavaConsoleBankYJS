@@ -2,10 +2,19 @@ package banking2;
 
 public class NormalAccount extends Account {
 
-	public NormalAccount(String accNum, String name, int balance, int accType, char credit, int interest,
-			int plusInterest) {
-		super(accNum, name, balance, accType, credit, interest, plusInterest);
-		// TODO Auto-generated constructor stub
-	}
+	private int interest;
 	
+	public NormalAccount(String accNum, String name, int balance, int accType, int interest) {
+		super(accNum, name, balance, accType);
+		this.interest = interest;
+	}
+
+	@Override
+	public int getInterest() {
+		return interest;
+	}
+	@Override
+	public void setInterest(int interest) {
+		this.interest = interest;
+	}
 }
