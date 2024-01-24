@@ -13,7 +13,7 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class AccountManager implements Serializable {
+public class AccountManager {
 	private static final int MAX_NUM = 50;
 	private Account[] account = new Account[MAX_NUM]; 
 	private int numOfAcc = 0;
