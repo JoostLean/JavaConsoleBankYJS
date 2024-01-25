@@ -3,6 +3,7 @@ package banking6;
 import java.io.Serializable;
 import java.util.Objects;
 
+//최상위 클래스인 Account에서 Serializable를 구현하지 않으면 중복계좌 발견시 덮어쓰기 할때 문제가 발생한다. 
 public abstract class Account implements Serializable {
 
 	private String accNum;
@@ -63,6 +64,7 @@ public abstract class Account implements Serializable {
 		this.credit = credit;
 	}
 
+	//hashCode와 equals를 통해 계좌의 중복을 실질적으로 처리한다.
 	@Override
 	public int hashCode() {
 		return Objects.hash(accNum, accType, balance, credit, interest, name, plusInterest);
